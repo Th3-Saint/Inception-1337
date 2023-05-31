@@ -1,30 +1,27 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    Dockerfile                                         :+:      :+:    :+:    #
+#    script.sh                                          :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: mrobaii <mrobaii@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/05/31 03:05:54 by mrobaii           #+#    #+#              #
-#    Updated: 2023/05/31 10:45:09 by mrobaii          ###   ########.fr        #
+#    Created: 2023/05/31 11:21:14 by mrobaii           #+#    #+#              #
+#    Updated: 2023/05/31 13:59:35 by mrobaii          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-FROM debian:buster
+#!/bin/bash
 
-RUN  apt-get update \
-	&&  apt-get install -y nginx \
-	&& apt-get install -y inotify-tools \
-	&& apt-get install openssl
+CREATE DATABASE users; > init.sql
 
-WORKDIR /etc/nginx
+USE users; >> init.sql
 
-COPY ssl/ ssl/
+CREATE TABLE users (
+	id INT PRIMARY KEY,
+	name VARCHAR(50),
+	email VARCHAR(100)
+); >> init.sql
 
-COPY . .
+INSERT INTO users (id, name, email) VALUES (10, 'SIMO', 'simo@1337.ma'); >> init.sql
 
-RUN chmod 777 ReloadScript.sh
-
-EXPOSE 443
-
-CMD ["nginx", "-g", "daemon off;"]
+mysqld --init-file=/tmp/init.sql

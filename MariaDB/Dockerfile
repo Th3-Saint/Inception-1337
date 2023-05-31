@@ -5,26 +5,22 @@
 #                                                     +:+ +:+         +:+      #
 #    By: mrobaii <mrobaii@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/05/31 03:05:54 by mrobaii           #+#    #+#              #
-#    Updated: 2023/05/31 10:45:09 by mrobaii          ###   ########.fr        #
+#    Created: 2023/05/31 10:45:17 by mrobaii           #+#    #+#              #
+#    Updated: 2023/05/31 14:00:41 by mrobaii          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 FROM debian:buster
 
-RUN  apt-get update \
-	&&  apt-get install -y nginx \
-	&& apt-get install -y inotify-tools \
-	&& apt-get install openssl
+RUN apt-get update \
+	&& apt-get install -y mariadb-server
 
-WORKDIR /etc/nginx
+COPY script.sh /tmp/script.sh
 
-COPY ssl/ ssl/
+RUN chmod +x /tmp/script.sh
 
-COPY . .
+RUN service mysql start
 
-RUN chmod 777 ReloadScript.sh
+WORKDIR /tmp/
 
-EXPOSE 443
-
-CMD ["nginx", "-g", "daemon off;"]
+CMD bash -c /tmp/script.sh
