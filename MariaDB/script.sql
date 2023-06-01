@@ -10,18 +10,20 @@
 #                                                                              #
 # **************************************************************************** #
 
-#!/bin/bash
 
-CREATE DATABASE users; > init.sql
 
-USE users; >> init.sql
+CREATE DATABASE wordpress;
+
+USE wordpress;
 
 CREATE TABLE users (
 	id INT PRIMARY KEY,
 	name VARCHAR(50),
 	email VARCHAR(100)
-); >> init.sql
+);
 
-INSERT INTO users (id, name, email) VALUES (10, 'SIMO', 'simo@1337.ma'); >> init.sql
+CREATE USER 'mrobaii'@'localhost' IDENTIFIED BY 'simo123';
 
-mysqld --init-file=/tmp/init.sql
+GRANT ALL PRIVILEGES ON wordpress TO 'mrobaii'@'localhost';
+
+FLUSH PRIVILEGES;
