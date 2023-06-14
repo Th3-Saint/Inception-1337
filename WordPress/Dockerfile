@@ -10,13 +10,16 @@
 #                                                                              #
 # **************************************************************************** #
 
-FROM ubuntu
+FROM debian:buster
 
-RUN export DEBIAN_FRONTEND=noninteractive \
-	&& apt-get update \
-	&& apt-get install -y nginx \
-	&& apt install -y mariadb-server \
-	&& apt-get install -y wordpress \
-	&& apt-get install -y php-fpm
+COPY script.sh script.sh
 
-CMD ["nginx", "-g", "daemon off;"]
+RUN apt-get update && apt-get install -y  unzip wget php-fpm  php-mysql && chmod +x script.sh
+
+RUN wget https://wordpress.org/latest.zip && unzip latest.zip && mv wordpress mrobaii.42.fr && service php7.3-fpm start
+
+COPY wp-config.php /mrobaii.42.fr/wp-config.php
+
+CMD ["./script.sh"]
+
+

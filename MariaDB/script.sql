@@ -16,14 +16,14 @@ CREATE DATABASE wordpress;
 
 USE wordpress;
 
-CREATE TABLE users (
+CREATE TABLE USER (
 	id INT PRIMARY KEY,
 	name VARCHAR(50),
 	email VARCHAR(100)
 );
 
-CREATE USER 'mrobaii'@'localhost' IDENTIFIED BY 'simo123';
+CREATE USER 'mrobaii'@'localhost' IDENTIFIED BY 'mrobaii';
 
-GRANT ALL PRIVILEGES ON wordpress TO 'mrobaii'@'localhost';
+GRANT ALL PRIVILEGES ON wordpress.* TO 'mrobaii'@'localhost';
 
 FLUSH PRIVILEGES;
