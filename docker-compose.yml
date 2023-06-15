@@ -1,6 +1,6 @@
 version: "3"
 services:
-  x-wordpress:
+  wordpress:
     build:
       context: WordPress/
       dockerfile: Dockerfile
@@ -10,41 +10,41 @@ services:
       - wordpress-sites:/mrobaii.42.fr
     ports:
       - '9000:9000'
-    # networks:
-    # - inception
+    networks:
+    - inception
 
   nginx:
     build:
       context: Nginx/
       dockerfile: Dockerfile
     depends_on:
-      - x-wordpress
+      - wordpress
     image: nginx:latest
     container_name: Nginx
     ports:
       - '443:443'
     volumes:
-      - wordpress-sites:/usr/share/nginx/mrobaii.42.fr
-    # networks:
-    #   - inception
+      - wordpress-sites:/var/www/html/
+    networks:
+      - inception
 
-  mariadb:
-    build:
-      context: Mariadb/
-      dockerfile: Dockerfile
-    image: mariadb:latest
-    container_name: Mariadb
-    ports:
-      - '3306:3306'
-    volumes:
-      - data_db:/var/lib/mysql
-    # networks:
-    # - inception
+  # mariadb:
+  #   build:
+  #     context: Mariadb/
+  #     dockerfile: Dockerfile
+  #   image: mariadb:latest
+  #   container_name: Mariadb
+  #   ports:
+  #     - '3306:3306'
+  #   volumes:
+  #     - data_db:/var/lib/mysql
+  #   networks:
+  #   - inception
 
 volumes:
   data_db:
   wordpress-sites:                                                                                                    
 
-# networks:
-#   inception:
-#     driver: bridge
+networks:
+  inception:
+    driver: bridge

@@ -1,6 +1,6 @@
 #! /bin/bash
 
-chown www-data:www-data /usr/share/nginx/mrobaii.42.fr -R
+chown www-data:www-data /var/www/html/ -R
 
 rm sites-enabled/default
 
