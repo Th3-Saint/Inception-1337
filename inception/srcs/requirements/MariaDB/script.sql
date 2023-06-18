@@ -11,18 +11,12 @@
 # **************************************************************************** #
 
 
-
 CREATE DATABASE wordpress;
 
 USE wordpress;
 
-CREATE TABLE USER (
-	id INT PRIMARY KEY,
-	name VARCHAR(50),
-	email VARCHAR(100)
-);
 
-CREATE USER 'mrobaii'@'localhost' IDENTIFIED BY 'mrobaii';
+CREATE USER 'mrobaii'@'%' IDENTIFIED BY 'leet1337';
 
 GRANT ALL PRIVILEGES ON wordpress.* TO 'mrobaii'@'localhost';
 
