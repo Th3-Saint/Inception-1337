@@ -12,15 +12,16 @@
 
 FROM debian:buster
 
-COPY script.sh script.sh
+
+COPY ./tools/script.sh script.sh
 
 RUN apt-get update && apt-get install -y unzip wget php7.3 php-fpm  php-mysql && chmod +x script.sh && mkdir -p /var/www/
 
 RUN wget https://wordpress.org/latest.zip && unzip latest.zip -d /var/www/ && mv /var/www/wordpress /var/www/html && service php7.3-fpm start
 
-COPY www.conf /etc/php/7.3/fpm/pool.d/www.conf
+COPY ./conf/www.conf /etc/php/7.3/fpm/pool.d/www.conf
 
-COPY wp-config.php /var/www/html/wp-config.php
+COPY ./conf/wp-config.php /var/www/html/wp-config.php
 
 CMD ["./script.sh"]
 

@@ -5,25 +5,20 @@
 #                                                     +:+ +:+         +:+      #
 #    By: mrobaii <mrobaii@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/05/31 03:05:54 by mrobaii           #+#    #+#              #
-#    Updated: 2023/05/31 10:45:09 by mrobaii          ###   ########.fr        #
+#    Created: 2023/05/31 10:45:17 by mrobaii           #+#    #+#              #
+#    Updated: 2023/05/31 14:00:41 by mrobaii          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 FROM debian:buster
 
-RUN  apt-get update \
-	&&  apt-get install -y nginx \
-	&& apt-get install openssl
+RUN apt-get update \
+    && apt-get install -y mariadb-server
 
-WORKDIR /etc/nginx
+COPY ./tools/script.sh script.sh
 
-COPY ssl/ ssl/
-
-COPY . .
+COPY ./conf/50.server.cnf /etc/mysql/mariadb.conf.d/
 
 RUN chmod +x script.sh 
-
-EXPOSE 443
 
 CMD ["./script.sh"]
