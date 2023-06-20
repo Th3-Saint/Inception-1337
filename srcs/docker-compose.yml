@@ -48,7 +48,21 @@ services:
     volumes:
       - data_db:/var/lib/mysql
     networks:
-    - inception
+      - inception
+
+  ftp:
+    build:
+      context: srcs/requirements/Bonus/Ftp
+      dockerfile: Dockerfile
+    image: ftp:latest
+    container_name: ftp
+    restart: always
+    ports:
+      - 21:21
+    volumes:
+      - wordpress-sites:/wordpress
+    networks:
+      - inception
 
 volumes:
   data_db:
