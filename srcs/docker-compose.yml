@@ -36,7 +36,7 @@ services:
 
   mariadb:
     build:
-      context: requirements/Mariadb/
+      context: requirements/MariaDB/
       dockerfile: Dockerfile
     image: mariadb:latest
     container_name: Mariadb
