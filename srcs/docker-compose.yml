@@ -59,7 +59,7 @@ services:
     container_name: ftp
     restart: always
     ports:
-      - 21:21
+      - 5555:21
     volumes:
       - wordpress-sites:/wordpress
     networks:
