@@ -112,12 +112,12 @@ volumes:
     driver_opts:
       type: none
       o: bind
-      device: /Users/mrobaii/data/data_db
+      device: /home/mrobaii/data/data_db
   wordpress-sites:  
     driver_opts:
       type: none
       o: bind
-      device: /Users/mrobaii/data/wordpress-sites                                                                                                  
+      device: /home/mrobaii/data/wordpress-sites                                                                                                  
 
 networks:
   inception:

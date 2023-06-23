@@ -21,6 +21,6 @@ clean:
 	rm -rf /home/$(USER)/data/data_db
 	rm -rf /home/$(USER)/data
 
-fclean: clean prune
+fclean: prune clean
 
 re: fclean all
