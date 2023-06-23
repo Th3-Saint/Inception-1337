@@ -1,7 +1,6 @@
 #!/bin/bash
 
-service php7.3-fpm restart
-
+sleep 10
 wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
 
 chmod +x wp-cli.phar
@@ -15,4 +14,4 @@ wp core install --url=$WP_URL --title=$WP_SITE_TITLE --admin_user=$WP_ADMIN_USER
 
 wp user create $WP_USER $WP_USER_EMAIL --role=$WP_USER_ROLE --user_pass=$WP_USER_PASSWORD --allow-root
 
-tail -f /dev/null
+php-fpm7.3 -F

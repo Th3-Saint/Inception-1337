@@ -6,6 +6,7 @@ services:
       dockerfile: Dockerfile
     depends_on:
       - mariadb
+      - redis
     image: wordpress:latest
     container_name: wordpress
     restart: always
@@ -61,6 +62,48 @@ services:
       - 21:21
     volumes:
       - wordpress-sites:/wordpress
+    networks:
+      - inception
+
+  static_site:
+    build:
+      context: srcs/requirements/Bonus/static_website
+      dockerfile: Dockerfile
+    image: static:latest
+    container_name: static
+    restart: always
+    ports:
+      - 80:80
+    networks:
+      - inception
+
+  redis:
+    build:
+      context: requirements/Bonus/redis
+      dockerfile: Dockerfile
+    image: redis:latest
+    container_name: redis
+    restart: always
+    networks:
+      - inception
+  
+  adminer:
+    build:
+      context: requirements/Bonus/Adminer/
+      dockerfile: Dockerfile
+    image: adminer:latest
+    container_name: Adminer
+    restart: always
+    networks:
+      - inception
+  cadvisor:
+    build:
+      context: requirements/Bonus/cadvisor
+      dockerfile: Dockerfile
+    image: cadvisor:latest
+    container_name: Cadvisor
+    ports:
+      - 8080:8080
     networks:
       - inception
 
