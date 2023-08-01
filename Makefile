@@ -2,6 +2,8 @@ NAME = Inception
 
 all: $(NAME)
 
+
+
 $(NAME):
 		mkdir -p /home/mrobaii/data/wordpress-sites
 		mkdir -p /home/mrobaii/data/data_db
